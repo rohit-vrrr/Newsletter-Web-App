@@ -32,10 +32,10 @@ app.post('/', function(req, res) {
   const jsonData = JSON.stringify(data);
 
   /* Getting url and options field to request */
-  const url = "https://us1.api.mailchimp.com/3.0/lists/48dc6e275f";
+  const url = "https://us1.api.mailchimp.com/3.0/lists/{List-Id}";
   const options = {
     method: "POST",
-    auth: "rohit1:54d53975eab0d136a5f48b12405aaaa3-us1"
+    auth: "rohit1:{API-key}"
   };
 
   /* Requesting Mailchimp to send some data */
@@ -55,7 +55,7 @@ app.listen(3000, function() {
 });
 
 // API Key
-// 54d53975eab0d136a5f48b12405aaaa3-us1
+// {API-key}
 
 // List ID
-// 48dc6e275f
+// {Audience-List-Id}
