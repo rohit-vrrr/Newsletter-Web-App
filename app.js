@@ -32,7 +32,7 @@ app.post('/', function(req, res) {
   const jsonData = JSON.stringify(data);
 
   /* Getting url and options field to request */
-  const url = "https://us1.api.mailchimp.com/3.0/lists/{List-Id}";
+  const url = "https://{API-key-server}.api.mailchimp.com/3.0/lists/{List-id}";
   const options = {
     method: "POST",
     auth: "rohit1:{API-key}"
@@ -40,6 +40,12 @@ app.post('/', function(req, res) {
 
   /* Requesting Mailchimp to send some data */
   const request = https.request(url, options, function(response) {
+    if(response.statusCode === 200) {
+      res.sendFile(__dirname + "/success.html");
+    } else {
+      res.sendFile(__dirname + "/failure.html");
+    }
+
     response.on("data", function(data) {
       console.log(JSON.parse(data));
     });
@@ -50,6 +56,10 @@ app.post('/', function(req, res) {
   request.end();
 });
 
+app.post('/failure', function(req, res) {
+  res.redirect('/');
+});
+
 app.listen(3000, function() {
   console.log("Listening on port 3000");
 });
@@ -58,4 +68,4 @@ app.listen(3000, function() {
 // {API-key}
 
 // List ID
-// {Audience-List-Id}
+// {List-id}
